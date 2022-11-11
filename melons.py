@@ -4,7 +4,7 @@ class AbtractMelonOrder:
 
     def __init__(self, species, qty, shipped, order_type, tax):
         """Initialize melon order attributes."""
-        # super().__init__()
+
         self.species = species
         self.qty = qty
         self.shipped = shipped
@@ -31,22 +31,22 @@ class DomesticMelonOrder(AbtractMelonOrder):
     def __init__(self, species, qty):
         """Initialize melon order attributes."""
 
-        super().__init__(species=species, qty= qty, shipped = False, order_type="domestic", tax=0.08)
+        super().__init__(species = species, qty = qty, shipped = False, 
+        order_type = "Domestic", tax = 0.08)
 
 
-    def get_total(self):
-        """Calculate price, including tax."""
+    def get_total(self): 
+        """Calculate price, including tax.""" 
 
-        base_price = 5
+        base_price = 5 
 
-        if self.species == 'Christmas':
+        if self.species == 'Christmas': 
             new_price = base_price * 1.5
             total = (1 + self.tax) * self.qty * new_price
             return total
-        else:
-            super().get_total()
+        else: 
+            return super().get_total()
             
-        return total
 
     def mark_shipped(self):
         """Record the fact than an order has been shipped."""
@@ -60,11 +60,10 @@ class InternationalMelonOrder(AbtractMelonOrder):
     def __init__(self, species, qty, country_code):
         """Initialize melon order attributes."""
 
-        super().__init__(species = species, qty = qty, shipped = False, order_type = "international", tax = 0.17)
+        super().__init__(species = species, qty = qty, shipped = False, order_type = "International", tax = 0.17)
 
         self.country_code = country_code 
         
-
     def get_total(self):
         """Calculate price, including tax."""
 
@@ -83,8 +82,7 @@ class InternationalMelonOrder(AbtractMelonOrder):
             total = (1 + self.tax) * self.qty * new_price
             return total
         else:
-            super().get_total()
-        
+            return super().get_total()
         
 
     def mark_shipped(self):
@@ -101,15 +99,17 @@ class InternationalMelonOrder(AbtractMelonOrder):
 class GovernmentMelonOrder(AbtractMelonOrder):
     '''Government Melon Orders'''
 
-    def __init__(self, tax, order_type):
+    def __init__(self, species, qty):
 
-        self.tax = 0.00
-        self.order_type = "Government"
-        self.passed_inspection = False
+        super().__init__(species = species, qty = qty, shipped = False, 
+        order_type = 'Government', tax = 0.00)
+
+        self.passed_inspection = False 
     
-    def mark_inspection(self, passed):
+    def mark_inspection(self):
+        '''Whether or not a melon has passed inspection'''
 
-        if passed:
+        if input('Passed?') == 'Passed' or 'passed':
             self.passed_inspection = True
         else:
             self.passed_inspection = False 
